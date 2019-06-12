@@ -1,6 +1,6 @@
 import Pkg
 Pkg.activate(".")
-using JuMP, ProxSDP, SCS, LinearAlgebra, JLD, BenchmarkTools
+using JuMP, ProxSDP, SCS, LinearAlgebra, JLD
 
 function solvewithprox(W, n)
     m = Model(with_optimizer(ProxSDP.Optimizer, log_verbose = true))
@@ -25,15 +25,15 @@ end
 
 n = 50
 W = load("matrixW50.jld")["W"]
-@benchmark solvewithprox(W, n)
-@benchmark solvewithscs(W, n)
+solvewithprox(W, n)
+solvewithscs(W, n)
 
 n = 100
 W = load("matrixW100.jld")["W"]
-@benchmark solvewithprox(W, n)
-@benchmark solvewithscs(W, n)
+solvewithprox(W, n)
+solvewithscs(W, n)
 
 n = 300
 W = load("matrixW300.jld")["W"]
-@benchmark solvewithprox(W, n)
-@benchmark solvewithscs(W, n)
+solvewithprox(W, n)
+solvewithscs(W, n)
